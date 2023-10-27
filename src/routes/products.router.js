@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
     res.json(newProduct);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ error: "Faltan campos obligatorios" });
+    res.status(400).json({ error: "Faltan campos obligatorios o el # code ya existe" });
   }
 });
 

@@ -120,7 +120,20 @@
     "id": 10,
     "title": "Impresora HP DeskJet",
     "description": "Impresora de inyección de tinta",
-    "code": "GHI101",
+    "code": "GHI1000",
+    "price": 79.99,
+    "stock": 70,
+    "category": "Electrónica",
+    "thumbnails": [
+      "ruta19.jpg",
+      "ruta20.jpg"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Impresora Lenovo DeskJet",
+    "description": "Impresora de inyección de tinta",
+    "code": "GHI1005",
     "price": 79.99,
     "stock": 70,
     "category": "Electrónica",

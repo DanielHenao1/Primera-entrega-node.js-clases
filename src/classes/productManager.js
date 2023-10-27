@@ -41,21 +41,26 @@ class ProductManager {
     const data = await fs.readFile(this.productsFile, "utf8");
     const products = JSON.parse(data);
 
-    const newProductId = products.length + 1;
-    const newProduct = {
-      id: newProductId,
-      ...newProductData,
-    };
+    // Verificar si el código es único
+    if (await this.isProductCodeUnique(newProductData.code)) {
+      const newProductId = products.length + 1;
+      const newProduct = {
+        id: newProductId,
+        ...newProductData,
+      };
 
-    products.push(newProduct);
+      products.push(newProduct);
 
-    await fs.writeFile(
-      this.productsFile,
-      JSON.stringify(products, null, 2),
-      "utf8"
-    );
+      await fs.writeFile(
+        this.productsFile,
+        JSON.stringify(products, null, 2),
+        "utf8"
+      );
 
-    return newProduct;
+      return newProduct;
+    } else {
+      throw new Error("El código de producto ya existe.");
+    }
   }
 
   async updateProduct(id, updatedProductData) {
@@ -79,6 +84,13 @@ class ProductManager {
     );
 
     return updatedProductData;
+  }
+
+  async isProductCodeUnique(code) {
+    const data = await fs.readFile(this.productsFile, "utf8");
+    const products = JSON.parse(data);
+
+    return !products.some((product) => product.code === code);
   }
 
   async deleteProduct(id) {
