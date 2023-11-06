@@ -37,6 +37,13 @@ class ProductManager {
     }
   }
 
+  async isProductCodeUnique(code) {
+    const data = await fs.readFile(this.productsFile, "utf8");
+    const products = JSON.parse(data);
+
+    return !products.some((product) => product.code === code);
+  }
+
   async addProduct(newProductData) {
     const data = await fs.readFile(this.productsFile, "utf8");
     const products = JSON.parse(data);
@@ -84,13 +91,6 @@ class ProductManager {
     );
 
     return updatedProductData;
-  }
-
-  async isProductCodeUnique(code) {
-    const data = await fs.readFile(this.productsFile, "utf8");
-    const products = JSON.parse(data);
-
-    return !products.some((product) => product.code === code);
   }
 
   async deleteProduct(id) {
